@@ -1,0 +1,18 @@
+# docker run -d -p 80:80 -v /var/run/docker.sock:/tmp/docker.sock:ro --net v39170 casi257/docker:nginx-proxy
+version: '3'
+
+networks:
+  vserver:
+    external:
+      name: v39170
+
+services:
+  proxy:
+    image: casi257/docker:nginx-proxy
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    networks:
+      - default
+      - vserver
+    ports:
+      - 80:80
